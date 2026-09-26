@@ -1,0 +1,5 @@
+package com.springSecurity.dto;
+
+public class AuthRequest {
+
+}

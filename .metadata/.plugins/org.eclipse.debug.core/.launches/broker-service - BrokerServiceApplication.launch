@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.springframework.ide.eclipse.boot.launch">
+    <booleanAttribute key="org.eclipse.debug.core.ATTR_FORCE_SYSTEM_CONSOLE_ENCODING" value="false"/>
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+        <listEntry value="/broker-service/src/main/java/com/algotrade/broker_service/BrokerServiceApplication.java"/>
+    </listAttribute>
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+        <listEntry value="1"/>
+    </listAttribute>
+    <mapAttribute key="org.eclipse.debug.core.environmentVariables">
+        <mapEntry key="BROKER_SERVICE_TOKEN" value="eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhbGdvdHJhZGUtYXV0aC1zZXJ2aWNlIiwic3ViIjoiYnJva2VyLXNlcnZpY2UiLCJzZXJ2aWNlIjp0cnVlLCJpYXQiOjE3ODI1OTQyNTIsImV4cCI6MjA5Nzk1NDI1Mn0.Gdmv2EZLBG93OMLdnSk_RBhJX0IkfMeAF9rOOFJB7xc-eOKf85ZUUA_wuPIThvsqclU74XEZgT4iFzk1ZjklsrUE6_jqMjPyOP2UREgqsyXfZkdU5pKLbcuwsPBCZ16zIzCcSuYgcfTPudqLQGWr_JEULkdWSguh6olJmmKOWhwRHqQRDqz5zUFKEdODTYYkCiR26U06fdDtKF8fTYQD94csMzbSc2Z154rtRfdO1Rja8LSqtJacRcRV4PctvxAqp3zVDsRxo-qrxR1S8NwNGuX5INi7-ENsdCU3I_80L3TtcUbmyj8sdSgjppxHH8hEJm6qeErSKMkr6bDLJkg7Pw"/>
+        <mapEntry key="ENCRYPTION_SECRET_KEY" value="mTE4qUJ6dQfKZdXu2HWeumPh/1vS7QQvjixVdm1BXSw="/>
+    </mapAttribute>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_ATTR_USE_ARGFILE" value="false"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_EXCLUDE_TEST_CODE" value="true"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_SHOW_CODEDETAILS_IN_EXCEPTION_MESSAGES" value="true"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_CLASSPATH_ONLY_JAR" value="false"/>
+    <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.springframework.ide.eclipse.boot.launch.BootMavenClassPathProvider"/>
+    <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.algotrade.broker_service.BrokerServiceApplication"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="broker-service"/>
+    <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.springframework.ide.eclipse.boot.launch.BootMavenSourcePathProvider"/>
+    <stringAttribute key="process_factory_id" value="org.springframework.ide.eclipse.boot.launch.process.BootProcessFactory"/>
+    <booleanAttribute key="spring.boot.ansi.console" value="true"/>
+    <stringAttribute key="spring.boot.app.properties" value=""/>
+    <booleanAttribute key="spring.boot.auto-connect" value="true"/>
+    <booleanAttribute key="spring.boot.dash.hidden" value="false"/>
+    <booleanAttribute key="spring.boot.debug.enable" value="false"/>
+    <booleanAttribute key="spring.boot.fast.startup" value="true"/>
+    <booleanAttribute key="spring.boot.jmx.enable" value="true"/>
+    <booleanAttribute key="spring.boot.lifecycle.enable" value="true"/>
+    <stringAttribute key="spring.boot.lifecycle.termination.timeout" value="15000"/>
+    <booleanAttribute key="spring.boot.livebean.enable" value="false"/>
+    <stringAttribute key="spring.boot.livebean.port" value="0"/>
+    <stringAttribute key="spring.boot.profile" value=""/>
+</launchConfiguration>

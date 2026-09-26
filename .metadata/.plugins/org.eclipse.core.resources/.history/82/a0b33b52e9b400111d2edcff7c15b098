@@ -1,0 +1,5 @@
+package com.springSecurity.utils;
+
+public enum Permission {
+
+}

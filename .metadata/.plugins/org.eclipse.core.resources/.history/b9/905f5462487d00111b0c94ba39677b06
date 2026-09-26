@@ -1,0 +1,36 @@
+package com.algotrade.broker_service.factory;
+
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
+import com.algotrade.broker_service.exception.BrokerException;
+import com.algotrade.broker_service.exception.ErrorCode;
+import com.algotrade.broker_service.model.BrokerAdapter;
+
+@Service
+public class BrokerAdapterFactory {
+	private final Map<String, BrokerAdapter> adapterRegistry;
+
+	public BrokerAdapterFactory(List<BrokerAdapter> adapters) {
+		this.adapterRegistry = adapters.stream()
+				.collect(Collectors.toUnmodifiableMap(
+						adapter -> adapter.getBrokerName().toUpperCase(),
+						Function.identity()));
+	}
+
+	public BrokerAdapter getAdapter(String brokerName) {
+
+		if(brokerName == null || brokerName.isEmpty())
+			throw new BrokerException(ErrorCode.INTERNAL_ERROR, "Broker name cannot be null or empty");
+
+		BrokerAdapter adapter = adapterRegistry.get(brokerName.toUpperCase());
+
+		if(adapter == null)
+			throw new BrokerException(ErrorCode.BROKER_UNAVAILABLE, "NO adapter implemented for broker: " + brokerName);
+		return adapter;
+	}
+}

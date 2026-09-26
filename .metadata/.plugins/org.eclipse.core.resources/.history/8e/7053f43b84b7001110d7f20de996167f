@@ -1,0 +1,5 @@
+package com.OAuthSecurity.controller;
+
+public class AuthController {
+
+}

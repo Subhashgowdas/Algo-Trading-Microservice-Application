@@ -1,0 +1,211 @@
+syntax = "proto3";
+
+package broker;
+
+option java_multiple_files = true;
+option java_package = "com.algotrade.broker.grpc";
+option java_outer_classname = "BrokerProto";
+
+service BrokerService {
+
+  rpc Ping (PingRequest) returns (PongResponse);
+
+  rpc PlaceOrder (OrderRequest) returns (OrderResponse);
+  rpc CancelOrder (CancelOrderRequest) returns (OrderResponse);
+  rpc ModifyOrder (ModifyOrderRequest) returns (OrderResponse);
+
+  rpc GetPositions (BrokerRequest) returns (stream Position);
+  rpc GetHoldings (BrokerRequest) returns (stream Holding);
+  rpc GetFunds (BrokerRequest) returns (Funds);
+  rpc GetTrades (BrokerRequest) returns (stream Trade);
+  rpc GetOrderHistory (BrokerRequest) returns (stream OrderHistoryItem);
+
+  rpc GetQuote (QuoteRequest) returns (Quote);
+  rpc StreamQuotes (QuoteStreamRequest) returns (stream Quote);
+  rpc GetMarketDepth (MarketDepthRequest) returns (MarketDepth);
+
+  rpc GetInstruments (BrokerRequest) returns (stream Instrument);
+
+  rpc GetProfile (BrokerRequest) returns (BrokerProfile);
+  rpc GetMarketStatus (MarketStatusRequest) returns (MarketStatus);
+}
+
+message BrokerCredentials {
+  string broker_name = 1;
+  string api_key = 2;
+  string api_secret = 3;
+  string access_token = 4;
+  map<string, string> extras = 5;
+}
+
+message BrokerRequest {
+  BrokerCredentials credentials = 1;
+}
+
+message PingRequest {
+  int64 timestamp = 1;
+}
+
+message PongResponse {
+  int64 client_timestamp = 1;
+  int64 server_timestamp = 2;
+}
+
+message OrderRequest {
+  BrokerCredentials credentials = 1;
+  string symbol = 2;
+  string exchange = 3;
+  string order_type = 4;
+  string transaction_type = 5;
+  int32 quantity = 6;
+  double price = 7;
+  double trigger_price = 8;
+  string product = 9;
+  string validity = 10;
+  string tag = 11;
+  double target_price = 12;
+  double stop_loss_price = 13;
+}
+
+message OrderResponse {
+  string order_id = 1;
+  string status = 2;
+  int32 filled_quantity = 3;
+  double average_price = 4;
+  string message = 5;
+  int64 timestamp = 6;
+}
+
+message CancelOrderRequest {
+  BrokerCredentials credentials = 1;
+  string order_id = 2;
+}
+
+message ModifyOrderRequest {
+  BrokerCredentials credentials = 1;
+  string order_id = 2;
+  double new_price = 3;
+  int32 new_quantity = 4;
+  string order_type = 5;
+  string validity = 6;
+}
+
+message Position {
+  string symbol = 1;
+  string exchange = 2;
+  int32 buy_quantity = 3;
+  int32 sell_quantity = 4;
+  int32 net_quantity = 5;
+  double average_buy_price = 6;
+  double average_sell_price = 7;
+  double unrealised_pnl = 8;
+  double realised_pnl = 9;
+  string product = 10;
+}
+
+message Holding {
+  string symbol = 1;
+  string exchange = 2;
+  int32 quantity = 3;
+  double average_price = 4;
+  double last_price = 5;
+  double pnl = 6;
+}
+
+message Funds {
+  double available_cash = 1;
+  double utilised_margin = 2;
+  double opening_balance = 3;
+  double total_balance = 4;
+}
+
+message Trade {
+  string trade_id = 1;
+  string order_id = 2;
+  string symbol = 3;
+  int32 quantity = 4;
+  double price = 5;
+  int64 trade_time = 6;
+  string buy_sell = 7;
+}
+
+message OrderHistoryItem {
+  string order_id = 1;
+  string status = 2;
+  string symbol = 3;
+  int32 quantity = 4;
+  double price = 5;
+  int64 placed_time = 6;
+  string order_type = 7;
+}
+
+message QuoteRequest {
+  BrokerCredentials credentials = 1;
+  string symbol = 2;
+}
+
+message QuoteStreamRequest {
+  BrokerCredentials credentials = 1;
+  repeated string symbols = 2;
+}
+
+message Quote {
+  string symbol = 1;
+  double ltp = 2;
+  double bid = 3;
+  double ask = 4;
+  int32 bid_volume = 5;
+  int32 ask_volume = 6;
+  int64 volume = 7;
+  double open = 8;
+  double high = 9;
+  double low = 10;
+  double close = 11;
+  double change = 12;
+  double change_percent = 13;
+  int64 timestamp = 14;
+}
+
+message MarketDepthRequest {
+  BrokerCredentials credentials = 1;
+  string symbol = 2;
+  int32 levels = 3;
+}
+
+message DepthLevel {
+  double price = 1;
+  int32 quantity = 2;
+}
+
+message MarketDepth {
+  string symbol = 1;
+  repeated DepthLevel bids = 2;
+  repeated DepthLevel asks = 3;
+}
+
+message Instrument {
+  string symbol = 1;
+  string exchange = 2;
+  string name = 3;
+  string segment = 4;
+  double lot_size = 5;
+  double tick_size = 6;
+}
+
+message BrokerProfile {
+  string client_id = 1;
+  string name = 2;
+  string email = 3;
+  repeated string enabled_products = 4;
+  repeated string enabled_exchanges = 5;
+}
+
+message MarketStatusRequest {
+  BrokerCredentials credentials = 1;
+  string exchange = 2;
+}
+
+message MarketStatus {
+  string exchange = 1;
+  string status = 2;
+}

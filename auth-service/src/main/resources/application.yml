@@ -1,0 +1,51 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: auth-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/algotrading_auth
+    username: postgres
+    password: Sub@07        # Change to your PostgreSQL password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: gowdass345@gmail.com   # Your Gmail address
+    password: ujivjfhflhsnhrgs      # 16-char Gmail App Password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+jwt:
+  private-key-path: classpath:keys/private_pkcs8.pem  # Generate private key : -- openssl genrsa -out private.pem 2048
+  public-key-path: classpath:keys/public_pkcs8.pem    # Generate public key : -- openssl rsa -pubout -in private.pem -out public.pem
+  access-token-ttl: 900000      # 15 minutes (milliseconds)
+  refresh-token-ttl: 604800000  # 7 days
+
+app:
+  email:
+    provider: smtp
+  otp:
+    ttl: 300                     # 5 seconds (for testing; change to 300 later)
+    length: 6
+  rate-limit:
+    register-initiate: 3
+  cros:
+    allowed-origins: http://localhost:3000 		# multiple origins: "http://localhost:3000,https://myapp.com"

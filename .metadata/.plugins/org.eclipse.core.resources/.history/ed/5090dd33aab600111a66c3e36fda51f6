@@ -1,0 +1,11 @@
+package com.springSecurity.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.springSecurity.dto.RegesterUserRequest;
+
+@Repository
+public interface UserRepository extends JpaRepository<RegesterUserRequest, Long>  
+
+}

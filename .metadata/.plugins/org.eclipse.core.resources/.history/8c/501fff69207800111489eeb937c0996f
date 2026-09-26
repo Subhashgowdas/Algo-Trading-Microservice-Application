@@ -1,0 +1,5 @@
+package com.algotrade.broker_service.model;
+
+public record BrokerCredentials() {
+
+}

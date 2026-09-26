@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="D:\Algo Trading Microservice Application\OAuthSecurity"/>
+			<item value="D:\Algo Trading Microservice Application\SpringSecurity"/>
+			<item value="D:\Algo Trading Microservice Application\AlgoTrading springboot workspace\common-cache-infrastructure"/>
+			<item value="D:\Algo Trading Microservice Application\AlgoTrading springboot workspace\broker-service"/>
+			<item value="D:\Algo Trading Microservice Application\AlgoTrading springboot workspace\auth-service"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+</section>

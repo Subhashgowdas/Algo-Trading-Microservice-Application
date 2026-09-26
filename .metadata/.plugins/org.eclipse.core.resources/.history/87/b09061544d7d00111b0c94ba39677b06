@@ -1,0 +1,8 @@
+package com.algotrade.broker_service.factory;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class BrokerAdapterFactory {
+
+}

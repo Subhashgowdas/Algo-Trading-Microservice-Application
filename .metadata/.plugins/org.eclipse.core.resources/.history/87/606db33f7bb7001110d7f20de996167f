@@ -1,0 +1,5 @@
+package com.OAuthSecurity.config;
+
+public class SecurityConfig {
+
+}

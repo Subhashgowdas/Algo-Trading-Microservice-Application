@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: OAuthSecurity
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+						client-id: clientid
+						client-secret: clientsecret
+						scope:
+							- openid
+							- profile
+							- email
+        provider:
+          google:
+						authorization-uri:
+						token-uri:
+						user-info-uri:

@@ -1,0 +1,8 @@
+package com.springSecurity.entiry;
+
+public enum Role {
+	ADMIN,
+	USER
+	
+	private final Set<>
+}

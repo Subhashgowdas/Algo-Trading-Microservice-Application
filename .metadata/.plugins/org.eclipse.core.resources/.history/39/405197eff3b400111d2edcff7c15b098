@@ -1,0 +1,9 @@
+package com.springSecurity.entiry;
+
+public enum Permissions {
+	
+	WEATHER_READ,
+	WEATHER_WRITE,
+	WEATHER_DELETE
+		
+}

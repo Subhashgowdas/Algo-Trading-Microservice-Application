@@ -1,0 +1,45 @@
+package com.springSecurity.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.springSecurity.dto.RegisterUserRequest;
+import com.springSecurity.entiry.Users;
+import com.springSecurity.service.UserDetailsService;
+
+@RestController
+@RequestMapping("api/user")
+public class UserController {
+
+	@Autowired
+	private UserDetailsService userDetailsService;
+	
+	@GetMapping("/login")
+	public String printLoginSucess() {
+		return "User login Sucessfully"; 
+	}
+	
+	@GetMapping("/tokenVerification")
+	@PreAuthorize("hasAuthority('READ')")
+	public String tokenVerify() {
+		return "Token verofication Sucessful";
+	}
+	
+	@PostMapping("/WriteAccess")
+	@PreAuthorize("hasAnyRole('ADMIN','USER')")
+	public String writeAccess(@RequestBody String val) {
+		return val;
+	}
+	
+	@PostMapping("/userRegister")
+	public Users registerUser(@RequestBody RegisterUserRequest registerUserRequest) {
+		
+	}
+	
+	
+}

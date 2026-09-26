@@ -1,0 +1,78 @@
+# ============================
+# Broker Service Configuration
+# ============================
+server:
+  port: 8082
+
+spring:
+  application:
+    name: broker-service
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+  # Virtual threads (Java 21+)
+  threads:
+    virtual:
+      enabled: true
+
+  # Redis – required by common-cache-infrastructure
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 2000ms
+
+  # Optional – if you later add JDBC / TimescaleDB
+  # datasource:
+  #   url: jdbc:postgresql://localhost:5432/broker_data
+  #   username: postgres
+  #   password: postgres
+
+# ============================
+# Internal Service-to-Service Security
+# ============================
+app:
+  jwt:
+     public-key-path: classpath:keys/public_pkcs8.pem   # same public key as auth-service
+     issuer: algotrade-auth-service               # must match the issuer in the tokens
+  internal:
+    auth-service-base-url: http://localhost:8081
+    service-token: ${BROKER_SERVICE_TOKEN}   # ← replace with the real token from auth-service
+  encryption:
+    secret-key: ${ENCRYPTION_SECRET_KEY}  # openssl rand -base64 32
+
+  # CORS – same as auth-service
+  cors:
+    allowed-origins: http://localhost:3000
+  brokerOauth:
+     redirect-base-url: http://localhost:3000 # Change to https://companyName.com for prod
+
+# ============================
+# Resilience4j (optional defaults)
+# ============================
+resilience4j:
+  circuitbreaker:
+    instances:
+      brokerApi:
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 30s
+        permitted-number-of-calls-in-half-open-state: 3
+#        ignore-exceptions:
+#          - com.algotrade.broker_service.exception.BrokerAuthenticationException
+  retry:
+    instances:
+      brokerApi:
+        max-attempts: 2
+        wait-duration: 500ms
+#        ignore-exceptions:
+#          - com.algotrade.broker_service.exception.BrokerAuthenticationException
+  ratelimiter:
+    instances:
+      brokerOrders:
+        limit-for-period: 10
+        limit-refresh-period: 1s
+        
+  broker:
+    zerodha:
+      name: "ZERODHA"
+      base-url : "https://api.kite.trade"
+      auth-url : "https://kite.zerodha.com"
