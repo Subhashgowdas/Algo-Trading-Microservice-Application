@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring accessors="true" comment="Delete element from project &apos;common-cache-infrastructure&apos;&#x0D;&#x0A;- Original project: &apos;common-cache-infrastructure&apos;&#x0D;&#x0A;- Original element: &apos;common-cache-infrastructure/src/main/java/com.algotrade.authservice.exception&apos;" description="Delete element" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.algotrade.authservice.exception" element2="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.algotrade.authservice" elements="2" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1787600209851" subPackages="false" version="1.0"/>
-</session>

@@ -1,5 +1,0 @@
-package com.springSecurity.service;
-
-public class CustomUserDetailsService {
-
-}

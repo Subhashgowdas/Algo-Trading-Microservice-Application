@@ -1,5 +1,0 @@
-package com.algotrade.broker_service.brokerAdapterImpl;
-
-public class ZerodhaAdapter {
-
-}

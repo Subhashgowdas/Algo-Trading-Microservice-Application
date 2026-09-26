@@ -1,8 +1,0 @@
-package com.springSecurity.dto;
-
-public class userResponse {
-	private Long id;
-	private String username;
-	private String role;
-
-}
