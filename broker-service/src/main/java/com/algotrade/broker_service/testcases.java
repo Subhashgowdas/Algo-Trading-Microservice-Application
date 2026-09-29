@@ -21,6 +21,8 @@ import io.jsonwebtoken.lang.Arrays;
 //        System.out.println("ENCRYPTION_SECRET_KEY ="  + System.getenv("ENCRYPTION_SECRET_KEY"));
 //    }
 //}
+
+//Started TestCode
 public class testcases{
 	
 //	private BrokerCredentialRepository repo;
