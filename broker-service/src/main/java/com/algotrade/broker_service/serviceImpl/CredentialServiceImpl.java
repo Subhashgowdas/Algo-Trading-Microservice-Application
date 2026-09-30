@@ -53,7 +53,7 @@ public class CredentialServiceImpl implements CredentialService{
 
 	private static final String CACHE_KEY_PREFIX = "brokerCreds:";
 	private static final long LOCAL_CACHE_TTL_MINUTES = 15;
-//	private static final long REDIS_CACHE_TTL_SECONDS = 60 * 60;
+	private static final long REDIS_CACHE_TTL_SECONDS = 60 * 60;
 	private static final int LOCAL_CACHE_MAX_CAPACITY = 500;
 	private static final long CLOCK_SKEW_BUFFER_MS = 30000L;
 
@@ -122,52 +122,52 @@ public class CredentialServiceImpl implements CredentialService{
 	@Override
 	public BrokerCredentials getCredentials(String email, String brokerName) {
 
-		//		String cacheKey = buildCacheKey(email, brokerName);
-		//
-		//		// 1. Local Memory Cache Read
-		//		BrokerCredentials credentials = inMemoryCache.getIfPresent(cacheKey);
-		//
-		//		if (credentials == null) {
-		//			log.info("Local cache miss for key: {}. Checking Redis...", cacheKey);
-		//
-		//			// 2. Remote Distributed Cache Read (Redis path)
-		//			try {
-		//				String encryptedJsonPayload = (String) redisCacheService.get(cacheKey).orElse(null);
-		//				if (encryptedJsonPayload != null) {
-		//					credentials = deserializeAndDecryptCredentials(encryptedJsonPayload);
-		//					log.info("Credentials cache hit (Remote Redis) for key: {}", cacheKey);
-		//				}
-		//			} catch (Exception e) {
-		//				log.error("Redis access failed for cache key {}. Continuing to auth-service fallback.", cacheKey, e);
-		//			}
-		//
-		//			// 3. Downstream Auth-Service Fetch (Source of Truth)
-		//			if (credentials == null) {
-		//				log.info("Redis cache miss/failure for key: {}. Fetching from Auth Service...", cacheKey);
-		//				credentials = fetchCredentialsFromAuthService(email, brokerName);
-		//
-		//				// Populate Redis only if we just fetched from Auth Service
-		//				if (credentials != null) {
-		//					try {
-		//						String encryptedJsonPayload = serializeAndEncryptCredentials(credentials);
-		//						redisCacheService.set(cacheKey, encryptedJsonPayload, REDIS_CACHE_TTL_SECONDS, TimeUnit.SECONDS);
-		//					} catch (Exception e) {
-		//						log.error("Failed to write credentials to Remote Redis cache for key: {}", cacheKey, e);
-		//					}
-		//				}
-		//			}
-		//
-		//			// 4. Populate Local Cache (Applies if fetched from Redis OR Auth Service)
-		//			if (credentials != null) {
-		//				inMemoryCache.put(cacheKey, credentials);
-		//				log.info("Populated local cache for key: {}", cacheKey);
-		//			}
-		//
-		//		} else {
-		//			log.info("Credentials cache hit (Local Memory) for key: {}", cacheKey);
-		//		}
+				String cacheKey = buildCacheKey(email, brokerName);
+		
+				// 1. Local Memory Cache Read
+				BrokerCredentials credentials = inMemoryCache.getIfPresent(cacheKey);
+		
+				if (credentials == null) {
+					log.info("Local cache miss for key: {}. Checking Redis...", cacheKey);
+		
+					// 2. Remote Distributed Cache Read (Redis path)
+					try {
+						String encryptedJsonPayload = (String) redisCacheService.get(cacheKey).orElse(null);
+						if (encryptedJsonPayload != null) {
+							credentials = deserializeAndDecryptCredentials(encryptedJsonPayload);
+							log.info("Credentials cache hit (Remote Redis) for key: {}", cacheKey);
+						}
+					} catch (Exception e) {
+						log.error("Redis access failed for cache key {}. Continuing to auth-service fallback.", cacheKey, e);
+					}
+		
+					// 3. Downstream Auth-Service Fetch (Source of Truth)
+					if (credentials == null) {
+						log.info("Redis cache miss/failure for key: {}. Fetching from Auth Service...", cacheKey);
+						credentials = fetchCredentialsFromAuthService(email, brokerName);
+		
+						// Populate Redis only if we just fetched from Auth Service
+						if (credentials != null) {
+							try {
+								String encryptedJsonPayload = serializeAndEncryptCredentials(credentials);
+								redisCacheService.set(cacheKey, encryptedJsonPayload, REDIS_CACHE_TTL_SECONDS, TimeUnit.SECONDS);
+							} catch (Exception e) {
+								log.error("Failed to write credentials to Remote Redis cache for key: {}", cacheKey, e);
+							}
+						}
+					}
+		
+					// 4. Populate Local Cache (Applies if fetched from Redis OR Auth Service)
+					if (credentials != null) {
+						inMemoryCache.put(cacheKey, credentials);
+						log.info("Populated local cache for key: {}", cacheKey);
+					}
+		
+				} else {
+					log.info("Credentials cache hit (Local Memory) for key: {}", cacheKey);
+				}
 
-		BrokerCredentials credentials = fetchCredentialsFromAuthService(email, brokerName);
+//		BrokerCredentials credentials = fetchCredentialsFromAuthService(email, brokerName);
 
 		return credentials;
 	}

@@ -34,8 +34,8 @@ spring:
             enable: true
 
 jwt:
-  private-key-path: classpath:keys/private_pkcs8.pem  # Generate private key : -- openssl genrsa -out private.pem 2048
-  public-key-path: classpath:keys/public_pkcs8.pem    # Generate public key : -- openssl rsa -pubout -in private.pem -out public.pem
+  private-key-path: classpath:keys/private_pkcs8.pem  # Generate private key : -- openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out private_pkcs8.pem
+  public-key-path: classpath:keys/public_pkcs8.pem    # Generate public key : -- openssl pkey -in private_pkcs8.pem -pubout -out public_pkcs8.pem
   access-token-ttl: 900000      # 15 minutes (milliseconds)
   refresh-token-ttl: 604800000  # 7 days
 

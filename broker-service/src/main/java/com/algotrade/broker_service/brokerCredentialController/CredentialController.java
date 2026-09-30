@@ -23,7 +23,7 @@ import com.algotrade.broker_service.exception.BrokerException;
 import com.algotrade.broker_service.exception.ErrorCode;
 import com.algotrade.broker_service.factory.BrokerAdapterFactory;
 import com.algotrade.broker_service.model.BrokerCredentials;
-import com.algotrade.broker_service.serviceImpl.CredentialServiceImpl;
+import com.algotrade.broker_service.service.CredentialService;
 
 import jakarta.validation.Valid;
 
@@ -39,10 +39,11 @@ import jakarta.validation.Valid;
 public class CredentialController {
 
 	private static final Logger log = LoggerFactory.getLogger(CredentialController.class);
-	private final CredentialServiceImpl credentialService;
+	
+	private final CredentialService credentialService;
 	private final BrokerAdapterFactory brokerAdapterFactory;
 
-	public CredentialController(CredentialServiceImpl credentialService,BrokerAdapterFactory brokerAdapterFactory) {
+	public CredentialController(CredentialService credentialService, BrokerAdapterFactory brokerAdapterFactory) {
 		this.credentialService = credentialService;
 		this.brokerAdapterFactory = brokerAdapterFactory;
 	}
