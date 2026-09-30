@@ -17,7 +17,7 @@ import com.algotrade.broker_service.model.Position;
 import com.algotrade.broker_service.serviceImpl.BrokerServiceImpl;
 
 @RestController
-@RequestMapping("/api/broker/credentials")
+@RequestMapping("/api/broker")
 public class OrderController {
 
 	private final BrokerServiceImpl brokerService;
